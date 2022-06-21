@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:inline="none"></script>
+</head>
+<body>
+<center>
+    <table border="2">
+        <tr>
+            <td>
+                <a href="/toAdd">添加</a>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/list(currPageNo=${userlist.currPageNo}-1)}">上一页</a>
+                <a th:href="@{/list(currPageNo=${userlist.currPageNo}+1)}">下一页</a>
+            </td>
+            <td>
+                <form th:action="@{/list}" th:method="post">
+                    <input type="text" name="username">
+                    <input type="submit" value="查询">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>编号</td>
+            <td>用户名</td>
+            <td>密码</td>
+            <td>操作</td>
+        </tr>
+        <tr th:each="users:${userlist.lists}">
+            <td th:text="${users.id}"></td>
+            <td th:text="${users.username}"></td>
+            <td th:text="${users.password}"></td>
+            <td>
+                <a th:href="@{/toUpdate(id=${users.id})}">修改</a>
+                <a th:href="@{/delete(id=${users.id})}">删除</a>
+            </td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>
